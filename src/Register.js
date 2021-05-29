@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import Header from "./Header";
 
-function Login() {
+function Register() {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
@@ -14,11 +14,11 @@ function Login() {
     }
   }, []);
 
-  async function login() {
+  async function signUP() {
     let item = { name, email, password };
     // console.warn(item);
 
-    let result = await fetch("http://localhost:8000/api/login", {
+    let result = await fetch("http://localhost:8000/api/register", {
       method: "POST",
       body: JSON.stringify(item),
       headers: {
@@ -34,10 +34,18 @@ function Login() {
   }
 
   return (
-    <div>
+    <>
       <Header />
       <div className="col-sm-6 offset-sm-3">
-        <h1>Login Page</h1>
+        <h1>Register Page</h1>
+        <input
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          className="form-control"
+          type="text"
+          placeholder="name"
+        />
+        <br />
         <input
           value={email}
           onChange={(e) => setEmail(e.target.value)}
@@ -54,12 +62,12 @@ function Login() {
           placeholder="pasword"
         />
         <br />
-        <button onClick={login} className="btn btn-primary">
-          Login
+        <button onClick={signUP} className="btn btn-primary">
+          Sign Up
         </button>
       </div>
-    </div>
+    </>
   );
 }
 
-export default Login;
+export default Register;
